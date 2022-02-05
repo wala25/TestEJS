@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+    <style>
+        body{position: relative;
+            display: flex;
+            margin: 0px;
+              background-color: rgb(207, 207, 207);
+              width: calc(100vw - 6px);
+              height: calc(100vh - 6px);
+              border:solid 3px rgb(105, 105, 105);
+              min-width: 500px;
+              min-height: 500px;
+            }
+        .left{position: absolute;
+            padding: 0px;
+            background-color: rgb(158, 158, 158);
+              width: 30%;
+              height: 100%;
+              border-right:solid 3px rgb(105, 105, 105);
+        }
+        .right{position: absolute;
+              padding: 0px;
+              left:30% ;
+              width: 70%;
+              height: 100%;
+              overflow: overlay;
+             }
+        .obj{
+            position:absolute; 
+            bottom:0px;
+            width:50px;
+            height:30px;
+            border:solid 2px rgb(105, 105, 105);
+            text-align: center;
+            line-height: 30px;
+        }
+        .middle{position: relative;
+            top: calc(50% - 65.4px);
+        }
+    </style>
+</head>
+<body>
+    <div class="left">
+          <div class="middle">
+            <%- include('../partials/input');%>
+          </div>
+          <div class="obj">
+           OBJ1
+          </div>
+    </div>
+
+    <div class="right" id="right">   
+    </div>
+
+    <div class="obj" style="right: 0px;">
+        OBJ3
+    </div>
+
+    <script>
+        let quantity= document.getElementById("Quantity");
+        quantity.addEventListener('input',(e)=>{fetch("/change/"+quantity.value, {method: "POST"})
+        .then((res)=>{res.text()
+            .then((r)=>{document.getElementById("right").innerHTML=r})
+          }) 
+    })
+     </script>
+    
+</body>
+</html>
